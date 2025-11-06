@@ -194,6 +194,27 @@
   gap: 1rem;
 }
 
+.theme-toggle {
+  background: none;
+  border: none;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background: hsl(var(--secondary));
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
 .user-badge {
   display: flex;
   align-items: center;

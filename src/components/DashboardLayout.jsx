@@ -1,15 +1,21 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
-import { GraduationCap, LogOut, Menu, X, ChevronRight } from "lucide-react"
+import { useTheme } from "../contexts/ThemeContext"
+import { GraduationCap, LogOut, Menu, X, ChevronRight, Sun, Moon } from "lucide-react"
 import "../styles/DashboardLayout.css"
 
 export default function DashboardLayout({ children, navigationItems, userRole }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { user, logout } = useAuth()
+  const { theme, toggleTheme } = useTheme()
   const location = useLocation()
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme)
+  }, [theme])
 
   const getRoleLabel = (role) => {
     const labels = {
@@ -74,6 +80,9 @@ export default function DashboardLayout({ children, navigationItems, userRole })
             <Menu size={24} />
           </button>
           <div className="header-right">
+            <button className="theme-toggle" onClick={toggleTheme}>
+              {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
             <div className="user-badge">
               <div className="user-avatar-small">{user?.name?.charAt(0) || "U"}</div>
               <span>{user?.name}</span>
